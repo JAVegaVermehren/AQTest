@@ -8,9 +8,7 @@ const cors = require("cors");
 const app = express();
 app.use(express.json());
 app.use(cors({
-  origin: ["https://aq-frontend.onrender.com", "http://localhost:5173", "https://aq-frontend-cjnb.onrender.com"],
-  methods: ["GET", "POST", "PATCH"],
-  allowedHeaders: ["Content-Type"]
+  origin: '*' // This allows any website to talk to your API. Great for testing.
 }));
 
 // Used to connect to the MongoDB Atlas.
