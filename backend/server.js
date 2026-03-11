@@ -12,7 +12,7 @@ app.use(cors({
 }));
 
 // Used to connect to the MongoDB Atlas.
-mongoose.connect(process.env.MONGODB_URI)
+mongoose.connect(process.env.MONGODB_URI2)
   .then(() => {
     // console.log("Connected to MongoDB Atlas");
   })
