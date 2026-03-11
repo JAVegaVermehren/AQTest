@@ -42,7 +42,7 @@ app.get("/", (req, res) => {
 });
 
 // Define port
-const PORT = process.env.PORT || 5001;
+const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
   //console.log(`Server running on http://localhost:${PORT}`);
 });
