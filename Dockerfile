@@ -40,7 +40,8 @@ RUN npm install
 # RUN ls -R /app
 
 # Expose app port
-EXPOSE 10000
+ENV PORT=8080
+EXPOSE 8080
 
 # Start server
 CMD ["node", "server.js"]
