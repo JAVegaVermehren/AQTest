@@ -44,3 +44,13 @@ const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
   //console.log(`Server running on http://localhost:${PORT}`);
 });
+
+app.get('/api/test-db', (req, res) => {
+  const secretExists = process.env.MONGODB_URI2 ? "Yes" : "No";
+  res.json({ 
+    message: "Secret Check", 
+    found: secretExists,
+    prefix: process.env.MONGODB_URI2 ? process.env.MONGODB_URI2.substring(0, 10) : "none"
+  });
+});
+
