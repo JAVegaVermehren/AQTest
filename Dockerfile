@@ -20,28 +20,16 @@ RUN pip3 install pandas matplotlib PyMuPDF
 # Set working directory
 WORKDIR /app
 
-# Copy server and folders
-COPY backend/server.js /app/server.js
-COPY backend/routes /app/routes
-COPY backend/models /app/models
-COPY backend/reports /app/reports
+WORKDIR /app
 
-# Copy required data files
-# COPY backend/model.rds /app/model.rds
-# COPY backend/dX.csv /app/dX.csv
-
-# Copy dependency files
-COPY backend/package*.json /app/
-
-# Install Node packages
+# 1. Copy dependencies first (better for caching)
+COPY backend/package*.json ./
 RUN npm install
 
-# Optional: Debug what made it in
-# RUN ls -R /app
+# 2. Copy EVERYTHING from the backend folder into /app
+COPY backend/ .
 
-# Expose app port
+# 3. Expose and Start
 ENV PORT=8080
 EXPOSE 8080
-
-# Start server
 CMD ["node", "server.js"]
