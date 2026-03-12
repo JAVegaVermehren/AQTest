@@ -6,10 +6,23 @@ const cors = require("cors");
 
 // Use the below "origin" field to distinguish which URLs are allowed to host the frontend.
 const app = express();
+
+// PUT THIS AT THE VERY TOP (Before any other app.use or app.get)
+app.get('/api/test-db', (req, res) => {
+  res.json({ 
+    status: "Backend is reachable",
+    env_check: process.env.MONGODB_URI2 ? "Secret Found" : "Secret Missing",
+    time: new Date().toISOString()
+  });
+});
+
+
 app.use(express.json());
 app.use(cors({
   origin: '*' // This allows any website to talk to your API. Great for testing.
 }));
+
+
 
 // Used to connect to the MongoDB Atlas.
 mongoose.connect(process.env.MONGODB_URI2)
@@ -45,12 +58,4 @@ app.listen(PORT, () => {
   //console.log(`Server running on http://localhost:${PORT}`);
 });
 
-app.get('/api/test-db', (req, res) => {
-  const secretExists = process.env.MONGODB_URI2 ? "Yes" : "No";
-  res.json({ 
-    message: "Secret Check", 
-    found: secretExists,
-    prefix: process.env.MONGODB_URI2 ? process.env.MONGODB_URI2.substring(0, 10) : "none"
-  });
-});
 
